@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  pagination_control:
+    path: ../
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
