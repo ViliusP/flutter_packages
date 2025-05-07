@@ -1,15 +1,19 @@
 name: pagination_control
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/ViliusP/flutter_packages
 
 environment:
   sdk: ^3.7.0
   flutter: ">=1.17.0"
 
+resolution: workspace
+
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_material_design_icons: ^1.1.7447
 
 dev_dependencies:
   flutter_test:
