@@ -25,7 +25,7 @@ class PaginationControl extends StatefulWidget {
     required this.current,
     required this.section,
     required this.total,
-    this.onChanged,
+    required this.onChanged,
     this.axis = Axis.horizontal,
   });
 
