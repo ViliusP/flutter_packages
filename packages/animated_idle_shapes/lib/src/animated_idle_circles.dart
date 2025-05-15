@@ -56,14 +56,20 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
   final List<VerticalDirection> _directions = [];
   final List<Duration> _durations = [];
 
-  void resetShapeProperties() {
-    _ranges.clear();
-    _durations.clear();
-    _directions.clear();
+  void adjustShapePropertyLists(int difference) {
+    if (difference < 0) {
+      int removed = 0;
+      while (removed < difference && _ranges.isNotEmpty) {
+        _ranges.removeLast();
+        _durations.removeLast();
+        _directions.removeLast();
+      }
+    }
   }
 
-  void generateShapeProperties() {
-    var countIter = List.generate(widget.count, (i) => i);
+  /// Adds properties to existing lists.
+  void generateShapeProperties(int count) {
+    var countIter = List.generate(count, (i) => i);
 
     for (int _ in countIter) {
       _ranges.add(generateRange());
@@ -76,7 +82,7 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
 
   @override
   void initState() {
-    generateShapeProperties();
+    generateShapeProperties(widget.count);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -92,8 +98,11 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
   void didUpdateWidget(covariant AnimatedIdleCircles oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.count != widget.count) {
-      resetShapeProperties();
-      generateShapeProperties();
+      int difference = widget.count - oldWidget.count;
+      adjustShapePropertyLists(difference);
+      if (difference > 0) {
+        generateShapeProperties(difference);
+      }
     }
   }
 
