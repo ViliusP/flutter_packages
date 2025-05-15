@@ -147,11 +147,15 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
                   _durations[index] = generateDuration();
                 });
               },
-              child: Container(
+              child: AnimatedContainer(
                 width: widget.radius,
                 height: widget.radius,
                 clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                decoration: ShapeDecoration(
+                  shape: CircleBorder(),
+                  color: color,
+                ),
+                duration: Duration(milliseconds: 200),
               ),
             );
           }),
