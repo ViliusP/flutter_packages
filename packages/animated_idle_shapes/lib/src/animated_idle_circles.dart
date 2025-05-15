@@ -118,9 +118,8 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
         widget.color ??
         Theme.of(context).colorScheme.primary.withAlpha(255 ~/ 1.5);
 
-    final double spacing = widget.radius / 4;
     double width = (widget.radius * widget.count);
-    width += (widget.count - 1) * spacing;
+    width += (widget.count - 1) * widget.spacing;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -130,7 +129,7 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
           fit: StackFit.expand,
           children: List.generate(widget.count, (index) {
             double left = horizontalCenter;
-            if (index != 0) left += (widget.radius + spacing) * index;
+            if (index != 0) left += (widget.radius + widget.spacing) * index;
 
             double top = verticalCenter;
             top += switch (_directions[index]) {
