@@ -114,9 +114,7 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
 
   @override
   Widget build(BuildContext context) {
-    final Color color =
-        widget.color ??
-        Theme.of(context).colorScheme.primary.withAlpha(255 ~/ 1.5);
+    final Color color = widget.color ?? const Color.fromRGBO(0, 0, 0, 1);
 
     double width = (widget.radius * widget.count);
     width += (widget.count - 1) * widget.spacing;
