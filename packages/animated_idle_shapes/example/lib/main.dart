@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_idle_shapes/animated_idle_shapes.dart';
 import 'package:flutter/material.dart';
 
@@ -131,6 +133,8 @@ class _ColorPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Random random = Random();
+
     bool isColorSliderEnabled = onChanged != null && value != null;
 
     onRedComponentChanged(double r) => onChanged!(
@@ -206,10 +210,54 @@ class _ColorPicker extends StatelessWidget {
           onComponentChanged: onAlphaComponentChanged,
         ),
 
-        SwitchListTile(
-          title: Text("Default color"),
-          value: value == null,
-          onChanged: onChanged != null ? defaultValueSwitchCallback : null,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: SwitchListTile(
+                  contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                  title: Text("Default color"),
+                  value: value == null,
+                  onChanged: onChanged != null ? defaultValueSwitchCallback : null,
+                ),
+              ),
+              SizedBox(height: 40, child: VerticalDivider()),
+              OutlinedButton(
+                onPressed:
+                    onChanged != null
+                        ? () {
+                          Color randomColor = Color.from(
+                            alpha: random.nextDouble(),
+                            red: random.nextDouble(),
+                            green: random.nextDouble(),
+                            blue: random.nextDouble(),
+                          );
+                          double buttonColorLuminance =
+                              randomColor.withAlpha(255).computeLuminance();
+
+                          while (buttonColorLuminance > 0.7) {
+                            randomColor = Color.from(
+                              alpha: random.nextDouble(),
+                              red: random.nextDouble(),
+                              green: random.nextDouble(),
+                              blue: random.nextDouble(),
+                            );
+                            buttonColorLuminance = randomColor.withAlpha(255).computeLuminance();
+                          }
+                          onChanged!(randomColor);
+                        }
+                        : null,
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                  foregroundColor: value?.withAlpha(255),
+                ),
+                child: Text("Random Color"),
+              ),
+            ],
+          ),
         ),
       ],
     );
