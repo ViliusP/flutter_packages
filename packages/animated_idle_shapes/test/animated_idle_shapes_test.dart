@@ -1,6 +1,5 @@
+import 'package:animated_idle_shapes/animated_idle_shapes.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:animated_idle_circles/animated_idle_circles.dart';
 
 void main() {
   test('adds one to input values', () {
