@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// A widget that displays a series of animated circles that move vertically
 /// in an idle motion. The animation alternates the direction of movement
@@ -41,9 +41,9 @@ class AnimatedIdleCircles extends StatefulWidget {
   const AnimatedIdleCircles({
     super.key,
     this.color,
-    this.radius = 20,
-    this.count = 1,
-    this.spacing = 0,
+    this.radius = 25,
+    this.count = 3,
+    this.spacing = 5,
   });
 
   @override
