@@ -37,6 +37,7 @@ class AnimatedIdleCircles extends StatefulWidget {
   final double spacing;
   final double radius;
   final Color? color;
+  final ShapeBorder shapeBorder;
 
   const AnimatedIdleCircles({
     super.key,
@@ -44,7 +45,7 @@ class AnimatedIdleCircles extends StatefulWidget {
     this.radius = 25,
     this.count = 3,
     this.spacing = 5,
-  });
+  }) : shapeBorder = const CircleBorder();
 
   @override
   State<AnimatedIdleCircles> createState() => _AnimatedIdleCirclesState();
@@ -161,7 +162,7 @@ class _AnimatedIdleCirclesState extends State<AnimatedIdleCircles> {
                 height: widget.radius,
                 clipBehavior: Clip.hardEdge,
                 decoration: ShapeDecoration(
-                  shape: CircleBorder(),
+                  shape: widget.shapeBorder,
                   color: color,
                 ),
                 duration: Duration(milliseconds: 200),
